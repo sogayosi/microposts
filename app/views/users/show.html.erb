@@ -1,4 +1,12 @@
-<h1>
-  <%= gravatar_for @user %>
-  <%= @user.name %>
-</h1>
+<h1>Account Information</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+  <%= gravatar_for @user %><br>
+  <%= @user.name %><br>
+  <%= @user.email %><br>
+  <!--
+  <%= link_to "edit" , edit_user_path(@user.id) %>
+  -->
+  </div>
+</div>
+
