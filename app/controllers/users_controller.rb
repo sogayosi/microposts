@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update]
-
+  before_action :check_user, only: [:edit, :update]
+  
   def show
    @user = User.find(params[:id])
    @microposts = @user.microposts.order(created_at: :desc)
@@ -36,16 +37,17 @@ class UsersController < ApplicationController
   end
   
   
-  
-  
-  
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile)
   end
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find(session[:user_id])
+  end
+
+  def check_user
+    redirect_to root_path if params[:id] != session[:user_id].to_s
   end
 end
