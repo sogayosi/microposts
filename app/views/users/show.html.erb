@@ -7,7 +7,7 @@
       </h1>
     </section>
   </aside>
-  <div class="col-md-8">
+  <div class="col-md-4">
     <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>
       <h3>Microposts (<%= @user.microposts.count %>)</h3>
@@ -16,4 +16,26 @@
       </ol>
     <% end %>
   </div>
+    <div class="col-md-4">
+      <% if @following_users.any? %>
+        <h3>Following Users (<%= @following_users.count %>)</h3>
+        <% @following_users.each do |following_user| %>
+          名前:<%= following_user.name %>
+          <span><%= link_to "view profile", following_user %></span>
+          <br>
+        <% end %>
+      <% else %>
+        <h3>Following Users (None)</h3>
+      <% end %>
+      <% if @follower_users.any? %>
+        <h3>Follower Users (<%= @follower_users.count %>)</h3>
+        <% @follower_users.each do |follower_user| %>
+          名前:<%= follower_user.name %>
+          <span><%= link_to "view profile", follower_user %></span>
+          <br>
+        <% end %>
+      <% else %>
+        <h3>Follower Users (None)</h3>
+      <% end %>
+    </div>    
 </div>
